@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  name: pr-20210302-1
+  name: pr-20210304-1
 spec:
   serviceAccountName: build-bot
   pipelineRef:
