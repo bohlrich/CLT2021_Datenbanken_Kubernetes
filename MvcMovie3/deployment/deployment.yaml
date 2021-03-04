@@ -5,7 +5,7 @@ metadata:
   labels:
     app: mvcmovie3
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: mvcmovie3
@@ -16,6 +16,20 @@ spec:
     spec:
       containers:
       - name: mvcmovie3
-        image: registry.k8s.aspicon.lan/microsoft/mvcmovie3:0.1.1
+        image: registry.k8s.aspicon.lan/microsoft/mvcmovie3:0.1.4
         ports:
-        - containerPort: 80
+        - containerPort: 8080
+---
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: mvcmovie3-svc
+  labels:
+    app: mvcmovie3
+spec:
+  selector:
+    app: mvcmovie3
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
