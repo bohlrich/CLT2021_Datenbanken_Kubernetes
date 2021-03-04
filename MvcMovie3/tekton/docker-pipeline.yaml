@@ -16,7 +16,7 @@ spec:
     default: "main"
   - name: imageUrl
     description: value should be like - us.icr.io/test_namespace/builtImageApp
-    default: "registry.dev.k8s.aspicon.lan/microsoft/mvcmovie3:0.1.0"
+    default: "registry.k8s.aspicon.lan/microsoft/mvcmovie3:0.1.0"
   tasks:
   - name: fetch-repository
     taskRef:
