@@ -1,7 +1,6 @@
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
 EXPOSE 8080
-EXPOSE 8443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
@@ -21,6 +20,7 @@ FROM base AS final
 ENV LANG de_DE.UTF-8
 ENV LANGUAGE de_DE:de
 ENV LC_ALL de_DE.UTF-8
+ENV ASPNETCORE_URLS=http://*:8080
 
 WORKDIR /app
 COPY --from=publish /app/publish .
