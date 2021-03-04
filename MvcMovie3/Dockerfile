@@ -10,8 +10,8 @@ RUN dotnet restore "MvcMovie/MvcMovie.csproj"
 WORKDIR "/src/MvcMovie"
 RUN dotnet build "MvcMovie.csproj" -c Release -o /app/build
 RUN dotnet tool install --global dotnet-ef && \
-    dotnet ef migrations add InitialCreate && \
-    dotnet ef database update
+    dotnet-ef migrations add InitialCreate && \
+    dotnet-ef database update
 
 FROM build AS publish
 RUN dotnet publish "MvcMovie.csproj" -c Release -o /app/publish
