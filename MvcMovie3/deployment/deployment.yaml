@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mvcmovie3-deployment
+  labels:
+    app: mvcmovie3
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mvcmovie3
+  template:
+    metadata:
+      labels:
+        app: mvcmovie3
+    spec:
+      containers:
+      - name: mvcmovie3
+        image: registry.k8s.aspicon.lan/microsoft/mvcmovie3:0.1.0
+        ports:
+        - containerPort: 80
