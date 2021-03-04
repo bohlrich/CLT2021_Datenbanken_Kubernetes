@@ -36,6 +36,12 @@ spec:
       value: $(params.revision)
     - name: sslVerify
       value: "false"
+    - name: httpProxy
+      value: "http://proxy.aspicon.lan:8080"
+    - name: httpsProxy
+      value: "http://proxy.aspicon.lan:8080"
+    - name: noProxy
+      value: "localhost,127.0.0.1"
   - name: build-image
     taskRef:
       name: buildah
