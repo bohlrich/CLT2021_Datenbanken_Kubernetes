@@ -51,6 +51,10 @@ spec:
       value: $(params.imageUrl)
     - name: TLSVERIFY
       value: "false"
+    - name: DOCKERFILE
+      value: "./MvcMovie3/"
+    - name: CONTEXT
+      value: "./MvcMovie3/"
     workspaces:
     - name: source
       workspace: shared-workspace
