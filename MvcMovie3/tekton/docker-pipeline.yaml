@@ -1,0 +1,52 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: docker-build-and-deploy
+spec:
+  workspaces:
+  - name: shared-workspace    
+  params:
+  - name: url
+    description: git url to clone
+    type: string
+    default: "https://github.com/bohlrich/CLT2021_Datenbanken_Kubernetes.git"
+  - name: revision
+    description: git revision to checkout (branch, tag, sha, ref)
+    type: string
+    default: "main"
+  - name: imageUrl
+    description: value should be like - us.icr.io/test_namespace/builtImageApp
+    default: "registry.dev.k8s.aspicon.lan/microsoft/mvcmovie3:0.1.0"
+  tasks:
+  - name: fetch-repository
+    taskRef:
+      name: git-clone
+      kind: ClusterTask
+    workspaces:
+    - name: output
+      workspace: shared-workspace
+    params:
+    - name: url
+      value: $(params.url)
+    - name: subdirectory
+      value: ""
+    - name: deleteExisting
+      value: "true"
+    - name: revision
+      value: $(params.revision)
+    - name: sslVerify
+      value: "false"
+  - name: build-image
+    taskRef:
+      name: buildah
+      kind: Task
+    params:
+    - name: IMAGE
+      value: $(params.imageUrl)
+    - name: TLSVERIFY
+      value: "false"
+    workspaces:
+    - name: source
+      workspace: shared-workspace
+    runAfter:
+    - fetch-repository
