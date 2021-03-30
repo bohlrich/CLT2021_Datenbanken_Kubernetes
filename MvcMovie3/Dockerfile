@@ -21,6 +21,11 @@ ENV LANG de_DE.UTF-8
 ENV LANGUAGE de_DE:de
 ENV LC_ALL de_DE.UTF-8
 ENV ASPNETCORE_URLS=http://*:8080
+ENV HTTP_PROXY=http://proxy.aspicon.lan:8080
+ENV http_proxy=http://proxy.aspicon.lan:8080
+ENV HTTPS_PROXY=http://proxy.aspicon.lan:8080
+ENV https_proxy=http://proxy.aspicon.lan:8080
+ENV NO_PROXY=localhost,127.0.0.1
 
 WORKDIR /app
 COPY --from=publish /app/publish .
